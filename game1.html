@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perfect Blackjack — SRS Trainer</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="game-page">
+
+  <!-- ===== SCREEN: DASHBOARD ===== -->
+  <div id="screen-dashboard">
+
+    <header id="stats-bar">
+      <div class="stat-item" style="font-weight:bold; letter-spacing:0.06em; color:var(--gold);">Perfect Blackjack</div>
+      <a href="index.html" id="btn-home">&#8592; Home</a>
+    </header>
+
+    <main id="dashboard-area">
+      <h2 id="dash-title">Today's Review</h2>
+
+      <div id="dash-stats-row">
+        <div class="dash-stat">
+          <span class="dash-stat-value" id="dash-due">0</span>
+          <span class="dash-stat-label">Due</span>
+        </div>
+        <div class="dash-stat">
+          <span class="dash-stat-value" id="dash-new">0</span>
+          <span class="dash-stat-label">New</span>
+        </div>
+        <div class="dash-stat">
+          <span class="dash-stat-value" id="dash-mastered">0</span>
+          <span class="dash-stat-label">Mastered</span>
+        </div>
+      </div>
+
+      <div id="dash-progress-wrap">
+        <div id="dash-progress-bar"></div>
+      </div>
+      <p id="dash-progress-label">0 / 0 mastered</p>
+
+      <button id="dash-start-btn" onclick="handleStartSession()">Start Session</button>
+    </main>
+
+  </div>
+
+  <!-- ===== SCREEN: SESSION ===== -->
+  <div id="screen-session" class="hidden">
+
+    <!-- Session Header with Progress -->
+    <header id="stats-bar">
+      <div id="session-progress-wrap">
+        <div id="session-progress-bar"></div>
+      </div>
+      <span id="session-progress-text">0 / 0</span>
+      <a href="index.html" id="btn-home">&#8592; Home</a>
+    </header>
+
+    <!-- Main Game Area -->
+    <main id="game-area">
+
+      <!-- Dealer Section -->
+      <section class="table-section">
+        <p class="section-label">Dealer Shows</p>
+        <div class="card-row" id="dealer-cards">
+          <!-- Cards rendered by JS -->
+        </div>
+      </section>
+
+      <!-- Player Section -->
+      <section class="table-section">
+        <p class="section-label">Your Hand</p>
+        <div class="card-row" id="player-cards">
+          <!-- Cards rendered by JS -->
+        </div>
+        <div id="hand-description">—</div>
+      </section>
+
+      <!-- Action Buttons -->
+      <section id="action-section">
+        <div id="action-buttons">
+          <button class="action-btn" id="btn-hit"       onclick="handleAction('H')">Hit</button>
+          <button class="action-btn" id="btn-stand"     onclick="handleAction('S')">Stand</button>
+          <button class="action-btn" id="btn-double"    onclick="handleAction('D')">Double</button>
+          <button class="action-btn" id="btn-split"     onclick="handleAction('P')">Split</button>
+          <button class="action-btn" id="btn-surrender" onclick="handleAction('Surrender')">Surrender</button>
+        </div>
+        <p id="insurance-reminder">Insurance &amp; Even Money: Never Take</p>
+      </section>
+
+    </main>
+
+    <!-- Wrong Answer Overlay -->
+    <div id="feedback-overlay" class="hidden">
+      <div id="feedback-box">
+        <div id="feedback-icon">&#x2717;</div>
+        <h3>Incorrect!</h3>
+        <hr id="feedback-divider" />
+        <p id="feedback-hand-summary"></p>
+        <p id="feedback-correct-action">The correct play is <strong id="feedback-action-name"></strong></p>
+        <p id="feedback-explanation"></p>
+        <button id="btn-continue" onclick="handleContinue()">Got it</button>
+      </div>
+    </div>
+
+    <!-- Correct Flash -->
+    <div id="correct-flash" class="hidden"></div>
+
+    <!-- Click Blocker (during auto-advance) -->
+    <div id="action-blocker" class="hidden"></div>
+
+  </div>
+
+  <!-- ===== SCREEN: COMPLETE ===== -->
+  <div id="screen-complete" class="hidden">
+
+    <main id="complete-area">
+      <div id="complete-icon">&#x2713;</div>
+      <h2 id="complete-title">Session Complete!</h2>
+
+      <div id="complete-stats">
+        <div class="complete-stat">
+          <span class="complete-stat-value" id="complete-reviewed">0</span>
+          <span class="complete-stat-label">Reviewed</span>
+        </div>
+        <div class="complete-stat">
+          <span class="complete-stat-value" id="complete-correct">0</span>
+          <span class="complete-stat-label">Correct</span>
+        </div>
+        <div class="complete-stat">
+          <span class="complete-stat-value" id="complete-accuracy">—</span>
+          <span class="complete-stat-label">Accuracy</span>
+        </div>
+      </div>
+
+      <p id="complete-tomorrow-label">
+        <span id="complete-tomorrow">0</span> cards due tomorrow
+      </p>
+
+      <div id="complete-buttons">
+        <button id="btn-study-more" onclick="handleStudyMore()">Study More</button>
+        <a href="index.html" id="btn-back-home">&#8592; Home</a>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Scripts in dependency order -->
+  <script src="js/strategy.js"></script>
+  <script src="js/handQueue.js"></script>
+  <script src="js/srsEngine.js"></script>
+  <script src="js/game1.js"></script>
+</body>
+</html>
